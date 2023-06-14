@@ -1,0 +1,88 @@
+<form role="form" (ngSubmit)="addUser()" class="form-signin form-group">
+
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметр
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Логин:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="username" placeholder="Логин  " name="username" value="" class="form-control" [(ngModel)]="userData.username" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Пароль:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="password" id="password" placeholder="Пароль" name="password" value="" class="form-control" [(ngModel)]="userData.password" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Номер:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" id="number" placeholder="XXX" name="number" value="" class="form-control" [(ngModel)]="userData.pbxUser.number">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Уровень доступа:
+        </th>
+        <td>
+          <div *ngFor="let role of possibleRoles" class="margin-10 form-check">
+            <label class="form-check-label" for="role{{role.id}}">
+              <input (change)="changeRoleCheckBox(role.name)" class="form-check-input" id="role{{role.id}}" name="role{{role.id}}" value="{{role.name}}" type="checkbox">
+              {{role.name}}
+            </label>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="btn-group">
+    <button type="submit" class="button" mat-flat-button color="primary">Добавить</button>
+    <button class="button" mat-flat-button routerLink="/users" color="basic" type="button">Назад</button>
+  </div>
+<!--  <div class="form-floating form-group">-->
+<!--    <label for="username">Логин:</label>-->
+<!--    <input type="text" id="username" placeholder="username" name="username" value="" class="form-control" [(ngModel)]="userData.username" required>-->
+<!--  </div>-->
+<!--  <p>-->
+<!--    <div class="form-floating form-group">-->
+<!--      <label for="password">Пароль:</label>-->
+<!--      <input type="password" id="password" placeholder="password" name="password" value="" class="form-control" [(ngModel)]="userData.password" required>-->
+<!--    </div>-->
+<!--  <p>-->
+<!--    <div class="form-floating form-group">-->
+<!--      <label for="number">Номер:</label>-->
+<!--      <input type="tel" id="number" placeholder="number" name="number" value="" class="form-control" [(ngModel)]="userData.pbxUser.number">-->
+<!--    </div>-->
+<!--  <p>-->
+<!--    <label>Уровень доступа:</label><p>-->
+<!--  <div>-->
+<!--    <div *ngFor="let role of possibleRoles" class="margin-left-10 form-check">-->
+<!--      <input (change)="changeRoleCheckBox(role.name)" class="form-check-input" id="role{{role.id}}" name="role{{role.id}}" value="{{role.name}}" type="checkbox"><p>-->
+<!--      <label class="form-check-label" for="role{{role.id}}">{{role.name}}</label>-->
+<!--    </div>-->
+<!--  </div>-->
+</form>

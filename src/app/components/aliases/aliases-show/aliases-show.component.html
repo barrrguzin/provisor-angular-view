@@ -1,0 +1,37 @@
+<div>
+  <button class="button" mat-flat-button routerLink="/" color="primary" type="button">Назад</button>
+  <mat-form-field>
+    <mat-label>Фильтр</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+  </mat-form-field>
+</div>
+
+
+<div class="container">
+  <table class="responsive-table" matSort (matSortChange)="sortData($event)">
+    <thead>
+    <tr>
+      <th scope="col" mat-sort-header="number">Номер</th>
+      <th scope="col" mat-sort-header="name">Отображаемое имя</th>
+      <th scope="col" mat-sort-header="group">Группа</th>
+      <th scope="col" mat-sort-header="register">Регистрация</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let alias of sortedAliases">
+      <td>
+        <a routerLink="/aliases/{{alias.address}}">{{alias.address}}</a>
+      </td>
+      <td>
+        {{alias.displayName}}
+      </td>
+      <td>
+        {{alias.interfaceGroup}}
+      </td>
+      <td>
+        {{alias.binded}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

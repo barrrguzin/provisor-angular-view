@@ -1,0 +1,56 @@
+<div>
+
+  <div>
+      <button type="button" mat-flat-button routerLink="/users/add" color="primary">Добавить</button>
+      <button type="button" mat-flat-button routerLink="/" color="basic">Назад</button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Фильтр</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Логин" #input>
+  </mat-form-field>
+
+  <div class="container">
+    <table class="responsive-table" matSort (matSortChange)="sortData($event)">
+
+      <thead>
+      <tr>
+        <th scope="col" mat-sort-header="username">Логин</th>
+        <th scope="col" mat-sort-header="roles">Права</th>
+        <th scope="col" mat-sort-header="pbxUserName">Пользователь телефонии</th>
+        <th scope="col" mat-sort-header="pbxUserNumber">Номер</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let user of sortedUsers">
+        <td>
+          <a routerLink="/users/{{user.id}}">{{user.username}}</a>
+        </td>
+        <td>
+          <p *ngFor="let role of user.roles">{{role.name}}</p>
+        </td>
+        <td>
+          <ng-container *ngIf="user.pbxUser == null || user.pbxUser.name == '-'">
+            <a>-</a>
+          </ng-container>
+
+          <ng-container *ngIf="user.pbxUser != null && user.pbxUser.name != '-'">
+            <a routerLink="/workers/{{user.pbxUser.id}}">{{user.pbxUser.name}}</a>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="user.pbxUser != null && user.pbxUser.number != '-'">
+            <a routerLink="/workers/{{user.pbxUser.id}}">{{user.pbxUser.number}}</a>
+          </ng-container>
+
+          <ng-container *ngIf="user.pbxUser == null || user.pbxUser.number == '-'">
+            <a>-</a>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

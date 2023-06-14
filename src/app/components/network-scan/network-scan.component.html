@@ -1,0 +1,80 @@
+<div>
+  <button type="button" class="button" mat-flat-button color="primary">Сканировать еще раз</button>
+  <button type="button" class="button" mat-flat-button color="basic" routerLink="/">Назад</button>
+</div>
+
+
+<div *ngIf="activeHosts[0].ipAddress == 'IP адресов в сети не обнаружено'">
+  {{activeHosts[0].ipAddress}}
+</div>
+
+
+<div *ngIf="activeHosts[0].ipAddress != 'IP адресов в сети не обнаружено'">
+
+  <mat-form-field>
+    <mat-label>Фильтр</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+  </mat-form-field>
+
+  <div class="container">
+    <table class="responsive-table" matSort (matSortChange)="sortData($event)">
+      <thead>
+      <tr>
+        <th scope="col" mat-sort-header="ipAddress">IP адрес</th>
+        <th scope="col" mat-sort-header="macAddress">MAC-адрес</th>
+        <th scope="col" mat-sort-header="pbxUserName">Пользователь</th>
+        <th scope="col" mat-sort-header="pbxUserNumber">Номер</th>
+        <th scope="col" mat-sort-header="phoneModel">Модель аппарата</th>
+        <th scope="col">Заменить конфиг</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let host of sortedHosts">
+
+        <th scope="row">
+          {{host.ipAddress}}
+        </th>
+
+        <td>
+          {{host.macAddress}}
+        </td>
+
+        <td>
+          {{host.name}}
+        </td>
+
+        <td>
+          {{host.phoneNumber}}
+        </td>
+
+        <td>
+          {{host.phoneModel}}
+        </td>
+
+
+        <td *ngIf="host.phoneModel == 'spa9XX'">
+          <div id="{{host.ipAddress}}" class="btn-group">
+            <button type="button" (click)="reloadConfiguration(host.ipAddress, host.macAddress, host.phoneModel)" class="btn btn-outline-warning">Залить конфиг</button>
+            <button type="button" (click)="generateConfigurationFile(host.phoneNumber)" class="btn btn-outline-warning">Сгенерировать конфиг</button>
+          </div>
+        </td>
+
+        <td *ngIf="host.phoneModel == 'vp5X'">
+          <div id="{{host.ipAddress}}" class="btn-group">
+            <button type="button" class="btn btn-outline-warning">Сгенерировать конфиг</button>
+          </div>
+        </td>
+
+        <td *ngIf="host.phoneModel != 'vp5X' && host.phoneModel != 'spa9XX'">
+          Действие не определено
+        </td>
+
+
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

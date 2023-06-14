@@ -1,0 +1,152 @@
+<div *ngIf="!isEditing">
+  <div class="btn-group">
+    <button (click)="editData()" class="button" mat-flat-button color="primary" type="button">Изменить</button>
+    <button class="button" mat-flat-button routerLink="/users" color="basic" type="button">Назад</button>
+  </div>
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметр
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Идентификатор в БД:
+        </th>
+        <td>
+          {{user.id}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Имя пользователя:
+        </th>
+        <td>
+          {{user.username}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Права:
+        </th>
+        <td>
+          <p *ngFor="let role of user.roles">
+            {{role.name}}
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Пользователь телефонии:
+        </th>
+        <td>
+          <ng-container *ngIf="user.pbxUser == null">
+            <a>-</a>
+          </ng-container>
+          <ng-container *ngIf="user.pbxUser != null">
+            <a href="/workers/{{user.pbxUser.id}}">{{user.pbxUser.name}}</a>
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Номер:
+        </th>
+        <td>
+          <ng-container *ngIf="user.pbxUser != null">
+            <a href="/workers/{{user.pbxUser.id}}">{{user.pbxUser.number}}</a>
+          </ng-container>
+          <ng-container *ngIf="user.pbxUser == null">
+            <a>-</a>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div *ngIf="isEditing">
+  <form role="form" (ngSubmit)="editUser()">
+
+    <div class="container">
+      <table class="responsive-table">
+
+        <thead>
+        <tr>
+          <th scope="col">
+            Параметр
+          </th>
+          <th scope="col">
+            Значение
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">
+            Имя пользователя:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="username" name="username" [(ngModel)]="user.username" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            Пароль:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="password" name="password" [(ngModel)]="user.password">
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">
+            Номер:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="pbxuser" name="pbxUser" [(ngModel)]="user.pbxUser.number">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            Права:
+          </th>
+          <td>
+            <div class="form-check margin-10" *ngFor="let role of possibleRoles">
+              <label class="form-check-label" for="role{{role.id}}">
+                <input (change)="changeRoleCheckBox(role.name)" class="form-check-input" id="role{{role.id}}" type="checkbox" name="role{{role.id}}" value="{{role.name}}" type="checkbox">
+                {{role.name}}
+              </label>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btn-group" role="group">
+      <button type="submit" class="button" mat-flat-button color="primary" id="edit">Изменить</button>
+    </div>
+  </form>
+  <form role="form" (ngSubmit)="deleteUser()">
+    <div role="group">
+      <button type="submit" class="button" mat-flat-button color="basic" id="delete">Удалить</button>
+    </div>
+  </form>
+  <button type="button" class="button" mat-flat-button color="basic" routerLink="/users">Назад</button>
+</div>

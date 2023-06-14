@@ -1,0 +1,13 @@
+<h2>Введите данные для генерации конфиг файлы:</h2>
+<form (ngSubmit)="generateConfigurationFile()" role="form" class="form-signin form-group">
+  <mat-form-field>
+    <mat-label for="number">Введите номер телефона:</mat-label>
+    <input matInput type="tel" id="number" name="number" [(ngModel)]="number" placeholder="xxx" required>
+  </mat-form-field>
+  <button type="submit" class="button" mat-flat-button color="primary">Добавить</button>
+</form>
+<script>
+  responseHandler('generate','/config/make', 'POST');
+</script>
+<button routerLink="/" type="button" class="button" mat-flat-button color="basic">Назаад</button>
+

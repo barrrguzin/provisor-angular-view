@@ -1,0 +1,41 @@
+<div>
+  <button class="button" mat-flat-button routerLink="/workers/add" color="primary" type="button">Добавить пользователя телефона</button>
+  <button class="button" mat-flat-button routerLink="/" color="basic" type="button">Назад</button>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <table class="responsive-table" matSort (matSortChange)="sortData($event)">
+    <thead>
+    <tr>
+      <th scope="col" mat-sort-header="number">Номер</th>
+      <th scope="col" mat-sort-header="name">Имя</th>
+      <th scope="col" mat-sort-header="mac">MAC-адрес</th>
+      <th scope="col" mat-sort-header="phoneModel">Модель аппарата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let worker of sortedWorkers">
+      <td>
+        <a routerLink="/aliases/{{worker.number}}">
+          {{worker.number}}
+        </a>
+      </td>
+      <td>
+        <a routerLink="/workers/{{worker.id}}">
+          {{worker.name}}
+        </a>
+      </td>
+      <td>
+        {{worker.mac}}
+      </td>
+      <td>
+        {{worker.phoneModel}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

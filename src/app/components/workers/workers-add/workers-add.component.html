@@ -1,0 +1,63 @@
+<form role="form" (ngSubmit)="addWorker()" class="form-signin form-group">
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметры
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Введите ФИО рабочего:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="name" name="name" placeholder="Анатолий Анатолий Анатолиевич" value="" class="form-control" [(ngModel)]="worker.name" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Введите номер телефона:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="number" name="number" placeholder="xxx" value="" class="form-control" [(ngModel)]="worker.number" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Введите MAC-адрес аппарата:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="mac" name="mac" placeholder="xx:xx:xx:xx:xx:xx" value="" class="form-control" [(ngModel)]="worker.mac" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Выберите модель телефона:
+        </th>
+        <td>
+          <mat-form-field>
+            <mat-select id="phoneModel" name="phoneModel" [(ngModel)]="worker.phoneModel">
+              <mat-option *ngFor="let model of supportedPhones" value="{{model}}" required>{{model}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="button" mat-flat-button color="primary">Добавить</button>
+</form>
+<button class="button" mat-flat-button routerLink="/workers" color="basic" type="button">Назад</button>
+

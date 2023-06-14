@@ -1,0 +1,78 @@
+<div class="container">
+  <table class="responsive-table">
+
+    <thead>
+    <tr>
+      <th scope="col">
+        Параметр
+      </th>
+      <th scope="col">
+        Значение
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">
+        Имя алиаса:
+      </th>
+      <td>
+        {{alias.iface}}
+      </td>
+    </tr>
+
+
+    <tr>
+      <th scope="row">
+        Логин:
+      </th>
+      <td>
+        {{alias.login}}
+      </td>
+    </tr>
+
+
+    <tr>
+      <th scope="row">
+        Пароль:
+      </th>
+      <td>
+        {{alias.password}}
+      </td>
+    </tr>
+
+
+    <tr>
+      <th scope="row">
+        Contact:
+      </th>
+      <td>
+        {{alias.contact}}
+      </td>
+    </tr>
+
+
+    <tr>
+      <th scope="row">
+        Последнее подключение:
+      </th>
+      <td>
+        {{alias.lastVia}}
+      </td>
+    </tr>
+
+
+    <tr>
+      <th scope="row">
+        User agent:
+      </th>
+      <td>
+        {{alias.userAgent}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <button class="button" mat-flat-button routerLink="/aliases" type="button" color="primary">Назад</button>
+</div>

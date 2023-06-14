@@ -1,0 +1,140 @@
+<div *ngIf="!isEditing">
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметр
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Идентификатор в БД:
+        </th>
+        <td>
+          {{worker.id}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Имя пользователя:
+        </th>
+        <td>
+          {{worker.name}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Внутренний номер:
+        </th>
+        <td>
+          {{worker.number}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          MAC-аддрес ТА:
+        </th>
+        <td>
+          {{worker.mac}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Модель телефона:
+        </th>
+        <td>
+          {{worker.phoneModel}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button (click)="editData()" type="button" class="button" mat-flat-button color="primary">Изменить</button>
+    <button class="button" mat-flat-button routerLink="/workers" color="basic" type="button">Назад</button>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="isEditing">
+  <form role="form" (ngSubmit)="editWorker()">
+    <input type="hidden" id="id" th:field="*{id}">
+    <div class="container">
+      <table class="responsive-table">
+        <thead>
+        <tr>
+          <th scope="col">
+            Параметр
+          </th>
+          <th scope="col">
+            Значение
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">
+            Введите ФИО рабочего:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="name" name="name" placeholder="Анатолий Анатолий Анатолиевич" [(ngModel)]="worker.name" required>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">
+            Введите номер телефона:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="number" name="number" placeholder="xxx" [(ngModel)]="worker.number" required>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">
+            Введите MAC-адрес аппарата:
+          </th>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" id="mac" name="mac" placeholder="xx:xx:xx:xx:xx:xx" [(ngModel)]="worker.mac" required>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">
+            Выберите модель телефона:
+          </th>
+          <td>
+            <mat-form-field>
+              <mat-select id="phoneModel" name="phoneModel" [(ngModel)]="worker.phoneModel">
+                <mat-option *ngFor="let model of supportedPhones" value="{{model}}" required>{{model}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="submit" class="button" mat-flat-button color="primary" id="edit">Изменить</button>
+  </form>
+  <form role="form" (ngSubmit)="deleteWorker()">
+    <p><button type="submit" class="button" mat-flat-button color="basic" id="delete">Удалить</button>
+  </form>
+
+
+  <button type="button" routerLink="/workers" class="button" mat-flat-button color="basic">Назад</button>
+
+</div>
