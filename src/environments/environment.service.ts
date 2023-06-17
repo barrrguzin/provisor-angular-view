@@ -21,7 +21,8 @@ export class EnvironmentService {
   }
 
   getBackendURL(): string {
-    return this.environment.apiUrl || 'https://sip.int.ptkom.ru:8443';
+    //return this.environment.apiUrl || 'https://sip.int.ptkom.ru:8443';
+    return this.environment.apiUrl || 'http://localhost:8080';
   }
 
   getUsernameStorageKey(): string {
